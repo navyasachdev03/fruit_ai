@@ -1,23 +1,36 @@
-import logo from './logo.svg';
+import { Routes, Route, useNavigate } from 'react-router-dom';
+import Account from './Account';
+import Home from './Home';
+import Chat from './Chat';
+import Faq from './Faq';
+import Translate from './Translate';
+import About from './About';
 import './App.css';
 
 function App() {
+
+  const navigate = useNavigate();
+
+  const handleLogin = () => {
+    navigate('/home');
+  }
+
+  const handleSignup = () => {
+    navigate('/home');
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div>
+        <Routes>
+          <Route path="/home" element={<Home />} />
+          <Route exact path="/" element={<Account onLogin={handleLogin} onSignup={handleSignup}/>} />
+          <Route path="/faqs" element={<Faq />} />
+          <Route path="/chat" element={<Chat />} />
+          <Route path="/translate" element={<Translate />} />
+          <Route path="/about" element={<About />} />
+        </Routes>
+      </div>
     </div>
   );
 }
